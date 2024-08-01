@@ -63,8 +63,8 @@
             resize: vertical;
         }
 
-        /* Campo de Entrada */
-        input[type="text"] {
+        /* Campo de Seleção */
+        select {
             width: calc(100% - 22px); /* Ajusta largura com padding */
             padding: 10px;
             border: 1px solid #ddd;
@@ -110,7 +110,11 @@
         <textarea id="inputText" placeholder="Digite o texto aqui..."></textarea>
         <br>
         <label for="idiomaDestino">Idioma de Destino (para tradução):</label>
-        <input type="text" id="idiomaDestino" placeholder="Ex: inglês, espanhol">
+        <select id="idiomaDestino">
+            <option value="inglês">Inglês</option>
+            <option value="espanhol">Espanhol</option>
+            <option value="francês">Francês</option>
+        </select>
         <br>
         <button onclick="traduzirTexto()">Traduzir</button>
         <button onclick="revisarTexto()">Revisar</button>
@@ -133,7 +137,7 @@
 
         function traduzirTexto() {
             const texto = document.getElementById('inputText').value;
-            const idiomaDestino = document.getElementById('idiomaDestino').value.toLowerCase();
+            const idiomaDestino = document.getElementById('idiomaDestino').value;
             const resultadoDiv = document.getElementById('resultado');
             
             // Verifica se o texto de entrada está no dicionário de traduções
