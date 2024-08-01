@@ -11,10 +11,9 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
-       /* styles.css */
+
         header {
-            background-color: #ADD8E6; /* Cor de fundo azul*/
+            background-color: #ADD8E6; /* Cor de fundo azul */
             color: white; /* Cor do texto */
             padding: 20px; /* Espaçamento interno */
             text-align: left; /* Alinhamento do texto */
@@ -28,7 +27,7 @@
             line-height: 1.6;
             padding: 20px;
         }
-        
+
         .logo {
             max-width: 200px; /* Ajusta o tamanho máximo da imagem */
             height: auto; /* Mantém a proporção da imagem */
@@ -119,17 +118,40 @@
     </div>
 
     <script>
+        const traducoes = {
+            "Olá": {
+                "inglês": "Hello",
+                "espanhol": "Hola",
+                "francês": "Bonjour"
+            },
+            "Obrigado": {
+                "inglês": "Thank you",
+                "espanhol": "Gracias",
+                "francês": "Merci"
+            }
+        };
+
         function traduzirTexto() {
             const texto = document.getElementById('inputText').value;
-            const idiomaDestino = document.getElementById('idiomaDestino').value;
-            const resultado = `Texto traduzido para ${idiomaDestino}: ${texto} (Simulado)`;
-            document.getElementById('resultado').innerText = resultado;
+            const idiomaDestino = document.getElementById('idiomaDestino').value.toLowerCase();
+            const resultadoDiv = document.getElementById('resultado');
+            
+            // Verifica se o texto de entrada está no dicionário de traduções
+            let traduzido = 'Texto não encontrado';
+            for (let chave in traducoes) {
+                if (texto.includes(chave)) {
+                    traduzido = traducoes[chave][idiomaDestino] || 'Tradução não disponível';
+                    break;
+                }
+            }
+
+            resultadoDiv.innerText = `Texto traduzido para ${idiomaDestino}: ${traduzido}`;
         }
 
         function revisarTexto() {
             const texto = document.getElementById('inputText').value;
-            const resultado = `Texto revisado: ${texto} (Simulado)`;
-            document.getElementById('resultado').innerText = resultado;
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerText = `Texto revisado: ${texto} (Simulado)`;
         }
     </script>
 </body>
