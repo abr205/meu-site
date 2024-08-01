@@ -136,20 +136,24 @@
         };
 
         function traduzirTexto() {
-            const texto = document.getElementById('inputText').value;
+            const texto = document.getElementById('inputText').value.trim();
             const idiomaDestino = document.getElementById('idiomaDestino').value;
             const resultadoDiv = document.getElementById('resultado');
             
-            // Verifica se o texto de entrada está no dicionário de traduções
-            let traduzido = 'Texto não encontrado';
-            for (let chave in traducoes) {
-                if (texto.includes(chave)) {
-                    traduzido = traducoes[chave][idiomaDestino] || 'Tradução não disponível';
-                    break;
-                }
-            }
+            // Divide o texto em palavras
+            const palavras = texto.split(/\s+/);
+            let traduzido = '';
 
-            resultadoDiv.innerText = `Texto traduzido para ${idiomaDestino}: ${traduzido}`;
+            // Traduz cada palavra
+            palavras.forEach(palavra => {
+                if (traducoes[palavra] && traducoes[palavra][idiomaDestino]) {
+                    traduzido += traducoes[palavra][idiomaDestino] + ' ';
+                } else {
+                    traduzido += palavra + ' '; // Mantém a palavra original se não for encontrada
+                }
+            });
+
+            resultadoDiv.innerText = `Texto traduzido para ${idiomaDestino}: ${traduzido.trim()}`;
         }
 
         function revisarTexto() {
