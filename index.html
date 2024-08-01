@@ -143,17 +143,25 @@
             // Divide o texto em palavras
             const palavras = texto.split(/\s+/);
             let traduzido = '';
+            let palavrasNaoEncontradas = [];
 
             // Traduz cada palavra
             palavras.forEach(palavra => {
                 if (traducoes[palavra] && traducoes[palavra][idiomaDestino]) {
                     traduzido += traducoes[palavra][idiomaDestino] + ' ';
                 } else {
-                    "palavra nao encontrada no banco de Dados"; // Mantém a palavra original se não for encontrada
+                    traduzido += palavra + ' '; // Mantém a palavra original se não for encontrada
+                    if (!palavrasNaoEncontradas.includes(palavra)) {
+                        palavrasNaoEncontradas.push(palavra);
+                    }
                 }
             });
 
-            resultadoDiv.innerText = `Texto traduzido para ${idiomaDestino}: ${traduzido.trim()}`;
+            if (palavrasNaoEncontradas.length > 0) {
+                resultadoDiv.innerText = `Texto traduzido para ${idiomaDestino}: ${traduzido.trim()}\nPalavras não encontradas: ${palavrasNaoEncontradas.join(', ')}`;
+            } else {
+                resultadoDiv.innerText = `Texto traduzido para ${idiomaDestino}: ${traduzido.trim()}`;
+            }
         }
 
         function revisarTexto() {
