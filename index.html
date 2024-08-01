@@ -150,7 +150,7 @@
                 if (traducoes[palavra] && traducoes[palavra][idiomaDestino]) {
                     traduzido += traducoes[palavra][idiomaDestino] + ' ';
                 } else {
-                    traduzido += palavra + ' '; // Mantém a palavra original se não for encontrada
+                    traduzido += palavra + ' '; // Mantém a palavra original se nao for encontrada
                     if (!palavrasNaoEncontradas.includes(palavra)) {
                         palavrasNaoEncontradas.push(palavra);
                     }
